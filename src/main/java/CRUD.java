@@ -30,6 +30,7 @@ public class CRUD {
 
         System.out.println("출생 년도(yyyy) : ");
         m.setYear(sc.nextInt());
+        sc.nextLine();
 
         System.out.println("고객 정보가 추가되었습니다.");
         memberMap.put(m.getNumber(), m);
@@ -71,16 +72,26 @@ public class CRUD {
         System.out.println("전화번호를 입력하세요 :");
         String num = sc.nextLine();
         ArrayList<recordsDTO> arr = recordsMap.get(num);
-        for (int i = 0; i < arr.size(); i++) {
-            recordsDTO r = arr.get(i);
-            System.out.println("["+r.getPetName()+"]의 진료 기록");
-            System.out.println("    진료일 : " + r.getDate());
-            System.out.println("    진료 내용 : "+ r.getSymptoms());
-            System.out.println("    소유주 이름 : " + r.getName());
-            System.out.println("    동물 이름 : " + r.getPetName());
-            System.out.println("    주소 : " + r.getCity());
-            System.out.println("    종류 : " + r.getBreed());
-            System.out.println("    출생연도 : " + r.getYear());
-        }
+        if (recordsMap.containsKey(num)) {
+            for (int i = 0; i < arr.size(); i++) {
+                recordsDTO r = arr.get(i);
+                System.out.println("[" + r.getPetName() + "]의 진료 기록");
+                System.out.println("    진료일 : " + r.getDate());
+                System.out.println("    진료 내용 : " + r.getSymptoms());
+                System.out.println("    소유주 이름 : " + r.getName());
+                System.out.println("    동물 이름 : " + r.getPetName());
+                System.out.println("    주소 : " + r.getCity());
+                System.out.println("    종류 : " + r.getBreed());
+                System.out.println("    출생연도 : " + r.getYear());
+            }
+        }else
+            System.out.println("해당 전화번호를 가진 진료 기록이 없습니다.");
+    }
+
+    public static void deleteRecordDTO(HashMap<String,ArrayList<recordsDTO>> recordsMap){
+        System.out.println("전화번호를 입력하세요 :");
+        String num = sc.nextLine();
+        recordsMap.remove(num);
+        System.out.println("진료 기록이 삭제되었습니다.");
     }
 }
